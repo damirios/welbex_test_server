@@ -14,7 +14,7 @@
     --- Автор сообщения<br>
 * На странице с записями должна быть реализована пагинация, на каждой странице (пагинации) должно отображаться по 20 записей - :heavy_check_mark:[функция getMessages](https://github.com/damirios/welbex_test_server/blob/main/service/blog_service.js)
 * Автор записи может редактировать или удалять запись - :heavy_check_mark:[middleware, проверяющий авторство](https://github.com/damirios/welbex_test_server/blob/main/middlewares/author_middleware.js)
-* Базу данных необходимо заполнить стартовыми записями 
+* Базу данных необходимо заполнить стартовыми записями - :heavy_check_mark:[функция populateDB](https://github.com/damirios/welbex_test_server/blob/main/index.js)
 * Необходимо выполнить деплой сервера для публичного доступа - :heavy_check_mark:[ссылка на деплой-версию](https://welbextestserver-production.up.railway.app/)
 * Необходимо написать документацию к эндпоинтам (вручную или сгенерировать из кода) - :heavy_check_mark:[swagger](https://welbextestserver-production.up.railway.app/api-doc/)
 
