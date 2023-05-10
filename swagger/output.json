@@ -1,0 +1,288 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Test Blog API",
+    "description": "Тестовое задание для Welbex.",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/api/messages/": {
+      "post": {
+        "summary": "Публикация сообщения",
+        "description": "Добавление сообщения в базу данных.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "type": "string",
+                  "example": "23-05-2023 | 21:03"
+                },
+                "text": {
+                  "type": "string",
+                  "example": "Hello, my name is Julia"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+        }
+      },
+      "get": {
+        "summary": "Получение списка сообщений",
+        "description": "Получение одной страницы со списком сообщений (по умол. 20 сообщений).",
+        "responses": {
+          "200": {
+            "description": "Список сообщений",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Message"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/messages/{id}": {
+      "put": {
+        "summary": "Изменение сообщения",
+        "description": "Изменение содержания определённого сообщения (доступно только автору)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "type": "string",
+                  "example": "23-05-2023 | 12:02"
+                },
+                "text": {
+                  "type": "string",
+                  "example": "Hello World!"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {}
+      },
+      "delete": {
+        "summary": "Удаление сообщения",
+        "description": "Удаление сообщения из базы данных (доступно только автору сообщения)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/api/users/signup": {
+      "post": {
+        "summary": "Регистрация пользователя",
+        "description": "Регистрация нового пользователя",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "damirios"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "qwerty234"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/users/login": {
+      "post": {
+        "summary": "Авторизация",
+        "description": "Авторизация пользователя (вход в систему)",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "damirios"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "qwerty234"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/users/logout": {
+      "post": {
+        "summary": "Выход из системы (unathorization)",
+        "description": "Выход пользователя из системы (удаление токенов)",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/users/activate/{activationLink}": {
+      "get": {
+        "summary": "Активация аккаунта",
+        "description": "Активация аккаунта нового пользователя (ни на что не влияет в данном случае)",
+        "parameters": [
+          {
+            "name": "activationLink",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/api/users/refresh": {
+      "get": {
+        "summary": "Обновление refresh токена",
+        "description": "Обновление refresh токена. Пример использования: 'умер' access токен и нужно его обновить - вызывается refresh",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/users/": {
+      "get": {
+        "summary": "Получение списка пользователей",
+        "description": "Получение списка всех пользователей (доступно только авторизованным)",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "Корневой рут",
+        "description": "Корневой рут. Сразу переадресовывает на /api/messages",
+        "parameters": [],
+        "responses": {}
+      }
+    }
+  },
+  "definitions": {
+    "Message": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "description": "Уникальный идентификатор сообщения",
+          "example": 1
+        },
+        "author": {
+          "type": "number",
+          "description": "Уникальный идентификатор автора сообщения",
+          "example": 2
+        },
+        "date": {
+          "type": "string",
+          "description": "Дата публикации сообщения в формате DD-MM-YYYY hh:mm",
+          "example": "23-05-2023 | 21:03"
+        },
+        "text": {
+          "type": "string",
+          "description": "Содержимое сообщения",
+          "example": "Hello, my name is Arthur"
+        }
+      },
+      "$ref": "#/definitions/Message"
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "description": "Уникальный идентификатор пользователя",
+          "example": 1
+        },
+        "email": {
+          "type": "string",
+          "description": "Электронная почта пользователя",
+          "example": "test@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "description": "Пароль, необходимый для авторизации пользователя",
+          "example": "12345"
+        }
+      }
+    }
+  }
+}
