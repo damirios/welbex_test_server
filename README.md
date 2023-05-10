@@ -4,19 +4,19 @@
 ### Задание
 Приложение представляет собой страницу, на которой могут делать записи любые авторизованные пользователи.
 
-* Необходимо реализовать регистрацию и авторизацию пользователя, а также проверку JWT-токена при внесении записей на страницу - 
+* Необходимо реализовать регистрацию и авторизацию пользователя, а также проверку JWT-токена при внесении записей на страницу - :heavy_check_mark:
 [controller](https://github.com/damirios/welbex_test_server/blob/main/controllers/user_controller.js),
 [model](https://github.com/damirios/welbex_test_server/blob/main/models/user_model.js),
 [service](https://github.com/damirios/welbex_test_server/blob/main/service/user_service.js).
-* Запись блога содержит: - [model](https://github.com/damirios/welbex_test_server/blob/main/models/message_model.js)<br>
+* Запись блога содержит: - :heavy_check_mark:[model](https://github.com/damirios/welbex_test_server/blob/main/models/message_model.js)<br>
     --- Дата записи<br>
     --- Сообщение: может содержать как текст, так и медиа<br>
     --- Автор сообщения<br>
-* На странице с записями должна быть реализована пагинация, на каждой странице (пагинации) должно отображаться по 20 записей - [функция getMessages](https://github.com/damirios/welbex_test_server/blob/main/service/blog_service.js)
-* Автор записи может редактировать или удалять запись - []
-* Базу данных необходимо заполнить стартовыми записями
-* Необходимо выполнить деплой сервера для публичного доступа
-* Необходимо написать документацию к эндпоинтам (вручную или сгенерировать из кода)
+* На странице с записями должна быть реализована пагинация, на каждой странице (пагинации) должно отображаться по 20 записей - :heavy_check_mark:[функция getMessages](https://github.com/damirios/welbex_test_server/blob/main/service/blog_service.js)
+* Автор записи может редактировать или удалять запись - :heavy_check_mark:[middleware, проверяющий авторство](https://github.com/damirios/welbex_test_server/blob/main/middlewares/author_middleware.js)
+* Базу данных необходимо заполнить стартовыми записями 
+* Необходимо выполнить деплой сервера для публичного доступа - :heavy_check_mark:[ссылка на деплой-версию](https://welbextestserver-production.up.railway.app/)
+* Необходимо написать документацию к эндпоинтам (вручную или сгенерировать из кода) - :heavy_check_mark:[swagger](https://welbextestserver-production.up.railway.app/api-doc/)
 
 ### Решение
 Корневой рут Blog API (деплой-версия): https://welbextestserver-production.up.railway.app
