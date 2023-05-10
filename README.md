@@ -8,12 +8,12 @@
 [controller](https://github.com/damirios/welbex_test_server/blob/main/controllers/user_controller.js),
 [model](https://github.com/damirios/welbex_test_server/blob/main/models/user_model.js),
 [service](https://github.com/damirios/welbex_test_server/blob/main/service/user_service.js).
-* Запись блога содержит:<br>
+* Запись блога содержит: - [model](https://github.com/damirios/welbex_test_server/blob/main/models/message_model.js)<br>
     --- Дата записи<br>
     --- Сообщение: может содержать как текст, так и медиа<br>
     --- Автор сообщения<br>
-* На странице с записями должна быть реализована пагинация, на каждой странице (пагинации) должно отображаться по 20 записей
-* Автор записи может редактировать или удалять запись
+* На странице с записями должна быть реализована пагинация, на каждой странице (пагинации) должно отображаться по 20 записей - [функция getMessages](https://github.com/damirios/welbex_test_server/blob/main/service/blog_service.js)
+* Автор записи может редактировать или удалять запись - []
 * Базу данных необходимо заполнить стартовыми записями
 * Необходимо выполнить деплой сервера для публичного доступа
 * Необходимо написать документацию к эндпоинтам (вручную или сгенерировать из кода)
