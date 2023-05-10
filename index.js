@@ -9,6 +9,7 @@ const commonRouter = require('./router/index');
 const errorMiddleware = require('./middlewares/error_middleware');
 const fs = require('fs');
 const swaggerUi = require('swagger-ui-express');
+const blogService = require('./service/blog_service');
 
 
 const swaggerFile = JSON.parse(fs.readFileSync('./swagger/output.json')); 
@@ -27,6 +28,24 @@ app.use('/api/users', userRouter);
 app.use('/', commonRouter);
 app.use(errorMiddleware);
 
+async function populateDB() {
+  const authorID = "645b85491ae44e2beea5c415";
+
+  for (let i = 0; i < 74; i++) {
+    let date;
+    if (i < 30) {
+      date = `${i + 1}-05-2023 12:23`;
+    } else if (i < 60) {
+      date = `${i - 30}-06-2023 12:23`;
+    } else {
+      date = `${i - 60}-07-2023 12:23`;
+    }
+
+    let text = `Сообщение номер ${i + 1}`;
+
+    await blogService.addMessage({author: authorID, date, text});
+  }
+}
 
 async function start() {
   try {
@@ -35,6 +54,7 @@ async function start() {
       useUnifiedTopology: true
     });
     app.listen(PORT, () => console.log("Server started on port" + ` ${PORT}`));
+    // app.listen(PORT, () => populateDB());
   } catch (error) {
     console.log(error);
   }
